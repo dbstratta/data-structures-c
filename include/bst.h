@@ -66,12 +66,12 @@ bool bst_has_right_child (BST bst);
 bool bst_has_left_child (BST bst);
 
 /**
- * Returns true if the BST is a leave.
+ * Returns true if the BST is a leaf.
  *
  * @param  bst the BST.
- * @return boolean indicating if the BST `bst` is a leave.
+ * @return boolean indicating if the BST `bst` is a leaf.
  */
-bool bst_is_leave (BST bst);
+bool bst_is_leaf (BST bst);
 
 /**
  * Adds element to the BST.
