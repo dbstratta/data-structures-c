@@ -15,7 +15,7 @@ struct BSTNode
  *
  * @param bst a uninitiallized bst.
  */
-void bst_create (BST *bst)
+void bst_create(BST *bst)
 {
         *bst = NULL;
 }
@@ -26,7 +26,7 @@ void bst_create (BST *bst)
  * @param  bst the BST.
  * @return the root element of `bst`.
  */
-int bst_root (BST bst)
+int bst_root(BST bst)
 {
         return bst->num;
 }
@@ -38,7 +38,7 @@ int bst_root (BST bst)
  * @param  bst the BST.
  * @return boolean indicating if the BST `bst` is empty.
  */
-bool bst_is_empty (BST bst)
+bool bst_is_empty(BST bst)
 {
         return bst == NULL;
 }
@@ -50,7 +50,7 @@ bool bst_is_empty (BST bst)
  * @param  bst the BST.
  * @return the right child of `bst`.
  */
-BST bst_right_child (BST bst)
+BST bst_right_child(BST bst)
 {
         return bst->right_child;
 }
@@ -62,7 +62,7 @@ BST bst_right_child (BST bst)
  * @param  bst the BST.
  * @return the left child of `bst`.
  */
-BST bst_left_child (BST bst)
+BST bst_left_child(BST bst)
 {
         return bst->left_child;
 }
@@ -74,7 +74,7 @@ BST bst_left_child (BST bst)
  * @param  bst the BST.
  * @return boolean indicating if the BST `bst` has a right child.
  */
-bool bst_has_right_child (BST bst)
+bool bst_has_right_child(BST bst)
 {
         return bst_is_empty(bst_right_child(bst));
 }
@@ -85,7 +85,7 @@ bool bst_has_right_child (BST bst)
  * @param  bst the BST.
  * @return boolean indicating if the BST `bst` has a left child.
  */
-bool bst_has_left_child (BST bst)
+bool bst_has_left_child(BST bst)
 {
         return bst_is_empty(bst_left_child(bst));
 }
@@ -96,7 +96,7 @@ bool bst_has_left_child (BST bst)
  * @param  bst the BST.
  * @return boolean indicating if the BST `bst` is a leaf.
  */
-bool bst_is_leaf (BST bst)
+bool bst_is_leaf(BST bst)
 {
         bool has_right_child = bst_has_right_child(bst);
         bool has_left_child = bst_has_left_child(bst);
@@ -112,17 +112,22 @@ bool bst_is_leaf (BST bst)
  * @param bst the BST.
  * @param num the element to be added.
  */
-void bst_add (BST *bst, int num)
+void bst_add(BST *bst, int num)
 {
-        if (bst_is_empty(*bst)) {
+        if (bst_is_empty(*bst))
+        {
                 (*bst) = malloc(sizeof(struct BSTNode));
                 (*bst)->num = num;
                 (*bst)->right_child = NULL;
                 (*bst)->left_child = NULL;
-        } else if (bst_root(*bst) < num) {
+        }
+        else if (bst_root(*bst) < num)
+        {
                 BST right_child = bst_right_child(*bst);
                 bst_add(&right_child, num);
-        } else if (bst_root(*bst) > num) {
+        }
+        else if (bst_root(*bst) > num)
+        {
                 BST left_child = bst_left_child(*bst);
                 bst_add(&left_child, num);
         }
@@ -135,15 +140,22 @@ void bst_add (BST *bst, int num)
  * @param  num the number to check look for.
  * @return boolean indicating if BST `bst` contains element `num`.
  */
-bool bst_contains (BST bst, int num)
+bool bst_contains(BST bst, int num)
 {
-        if (bst_is_empty(bst)) {
+        if (bst_is_empty(bst))
+        {
                 return false;
-        } else if (bst_root(bst) < num) {
+        }
+        else if (bst_root(bst) < num)
+        {
                 return bst_contains(bst_right_child(bst), num);
-        } else if (bst_root(bst) > num) {
+        }
+        else if (bst_root(bst) > num)
+        {
                 return bst_contains(bst_left_child(bst), num);
-        } else {
+        }
+        else
+        {
                 return true;
         }
 }
@@ -157,15 +169,22 @@ bool bst_contains (BST bst, int num)
  * @param  num the element to search.
  * @return sub BST of BST `bst` where element `num` is root.
  */
-BST bst_search (BST bst, int num)
+BST bst_search(BST bst, int num)
 {
-        if (bst_is_empty(bst)) {
+        if (bst_is_empty(bst))
+        {
                 return NULL;
-        } else if (bst_root(bst) < num) {
+        }
+        else if (bst_root(bst) < num)
+        {
                 return bst_search(bst_right_child(bst), num);
-        } else if (bst_root(bst) > num) {
+        }
+        else if (bst_root(bst) > num)
+        {
                 return bst_search(bst_left_child(bst), num);
-        } else {
+        }
+        else
+        {
                 return bst;
         }
 }
@@ -176,11 +195,14 @@ BST bst_search (BST bst, int num)
  * @param  bst the BST.
  * @return the smallest element of BST `bst`.
  */
-int bst_min (BST bst)
+int bst_min(BST bst)
 {
-        if (bst_has_right_child(bst)) {
+        if (bst_has_right_child(bst))
+        {
                 return bst_min(bst_left_child(bst));
-        } else {
+        }
+        else
+        {
                 return bst_root(bst);
         }
 }
@@ -191,11 +213,14 @@ int bst_min (BST bst)
  * @param  bst the BST.
  * @return the biggest element of the BST `bst`.
  */
-int bst_max (BST bst)
+int bst_max(BST bst)
 {
-        if (bst_has_right_child(bst)) {
+        if (bst_has_right_child(bst))
+        {
                 return bst_max(bst_right_child(bst));
-        } else {
+        }
+        else
+        {
                 return bst_root(bst);
         }
 }
@@ -209,24 +234,36 @@ int bst_max (BST bst)
  */
 void bst_remove(BST *bst, int num)
 {
-        if (!bst_is_empty(*bst)) {
-                if (bst_root(*bst) < num) {
+        if (!bst_is_empty(*bst))
+        {
+                if (bst_root(*bst) < num)
+                {
                         BST right_child = bst_right_child(*bst);
                         bst_remove(&right_child, num);
-                } else if (bst_root(*bst) > num) {
+                }
+                else if (bst_root(*bst) > num)
+                {
                         BST left_child = bst_left_child(*bst);
                         bst_remove(&left_child, num);
-                } else if (bst_is_leave(*bst)) {
+                }
+                else if (bst_is_leave(*bst))
+                {
                         free(*bst);
-                } else if (!bst_has_left_child(*bst)) {
+                }
+                else if (!bst_has_left_child(*bst))
+                {
                         BST temp_bst = *bst;
                         *bst = bst_right_child(*bst);
                         free(temp_bst);
-                } else if (!bst_has_right_child(*bst)) {
+                }
+                else if (!bst_has_right_child(*bst))
+                {
                         BST temp_bst = *bst;
                         *bst = bst_left_child(*bst);
                         free(temp_bst);
-                } else {
+                }
+                else
+                {
                         int max_from_left_child = bst_max(bst_left_child(*bst));
                         (*(*bst)).num = max_from_left_child;
 
@@ -242,11 +279,14 @@ void bst_remove(BST *bst, int num)
  * @param  bst the BST.
  * @return the quantity of nodes of BST `bst`.
  */
-int bst_quantity (BST bst)
+int bst_quantity(BST bst)
 {
-        if (bst_is_empty(bst)) {
+        if (bst_is_empty(bst))
+        {
                 return 0;
-        } else {
+        }
+        else
+        {
                 BST left_child = bst_left_child(bst);
                 BST right_child = bst_right_child(bst);
 
@@ -254,7 +294,8 @@ int bst_quantity (BST bst)
         }
 }
 
-int int_max (int a, int b) {
+int int_max(int a, int b)
+{
         return a > b ? a : b;
 }
 
@@ -265,11 +306,14 @@ int int_max (int a, int b) {
  * @param  bst the BST.
  * @return the height of BST `bst`.
  */
-int bst_height (BST bst)
+int bst_height(BST bst)
 {
-        if (bst_is_empty(bst)) {
+        if (bst_is_empty(bst))
+        {
                 return 0;
-        } else {
+        }
+        else
+        {
                 BST left_child = bst_left_child(bst);
                 BST right_child = bst_left_child(bst);
 
@@ -282,9 +326,10 @@ int bst_height (BST bst)
  *
  * @param bst the BST to be destroyed.
  */
-void bst_destroy (BST *bst)
+void bst_destroy(BST *bst)
 {
-        if (!bst_is_empty(*bst)) {
+        if (!bst_is_empty(*bst))
+        {
                 BST left_child = bst_left_child(*bst);
                 bst_destroy(&left_child);
 
